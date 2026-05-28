@@ -8,34 +8,31 @@ export function BMICalculator() {
 
   const calculateBMI = (e) => {
     e.preventDefault();
-    
+
     const w = parseFloat(weight);
     const h = parseFloat(height);
 
     if (w > 0 && h > 0) {
-      // Formula: weight / (height * height)
-      const bmi = (w / (h ** 2)).toFixed(2);
-      setBmiResult(bmi);
+      const bmi = w / (h ** 2); // keep as number
+      setBmiResult(bmi.toFixed(2)); // store formatted string
 
-      // Category Logic
       if (bmi >= 18.5 && bmi <= 24.99) {
         setCategory('You have a healthy weight.');
-      } else if (bmi < 18.5) { 
+      } else if (bmi < 18.5) {
         setCategory('You are underweight.');
-      } else if (bmi >= 25 && bmi <= 29.99){
+      } else if (bmi >= 25 && bmi <= 29.99) {
         setCategory('You are overweight.');
+      } else if (bmi >= 30 && bmi <= 34.99) {
+        setCategory('You are moderately obese.');
+      } else if (bmi >= 35 && bmi <= 39.99) {
+        setCategory('You are severely obese.');
+      } else if (bmi >= 40) {
+        setCategory('You are very severely obese.');
       }
-      } else if(bmi >=30 && bmi <=34.99){
-        setCategory('You are moderately obese.')
-      } else if(bmi >=35 && bmi <=39.99){
-        setCategory('You are severely obese.')
-      } else if(bmi >=40){
-        setCategory('You are very severely obese.')
-      }
-      else {
-        alert("Please enter valid positive numbers for weight and height.");
-      }
-    };
+    } else {
+      alert("Please enter valid positive numbers for weight and height.");
+    }
+  };
 
   const clearForm = () => {
     setWeight('');
@@ -45,10 +42,10 @@ export function BMICalculator() {
   };
 
   return (
-    <div style={{ 
-      padding: '20px', 
-      maxWidth: '400px', 
-      margin: '0 auto', 
+    <div style={{
+      padding: '20px',
+      maxWidth: '400px',
+      margin: '0 auto',
       fontFamily: 'Arial, sans-serif',
       border: '1px solid #ddd',
       borderRadius: '10px',
@@ -63,36 +60,36 @@ export function BMICalculator() {
       <form onSubmit={calculateBMI}>
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>Weight (kg):</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             step="0.1"
-            value={weight} 
-            onChange={(e) => setWeight(e.target.value)} 
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
             placeholder="e.g. 65"
             style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
-            required 
+            required
           />
         </div>
 
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', marginBottom: '5px' }}>Height (m):</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             step="0.01"
-            value={height} 
-            onChange={(e) => setHeight(e.target.value)} 
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
             placeholder="e.g. 1.8"
             style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
-            required 
+            required
           />
         </div>
 
-        <button type="submit" style={{ 
-          width: '100%', 
-          padding: '10px', 
-          backgroundColor: '#00bb55', 
-          color: 'white', 
-          border: 'none', 
+        <button type="submit" style={{
+          width: '100%',
+          padding: '10px',
+          backgroundColor: '#00bb55',
+          color: 'white',
+          border: 'none',
           borderRadius: '5px',
           cursor: 'pointer',
           marginBottom: '10px'
@@ -102,22 +99,22 @@ export function BMICalculator() {
       </form>
 
       {bmiResult && (
-        <div style={{ 
-          marginTop: '20px', 
-          padding: '15px', 
-          backgroundColor: '#f8f9fa', 
+        <div style={{
+          marginTop: '20px',
+          padding: '15px',
+          backgroundColor: '#f8f9fa',
           borderRadius: '5px',
           textAlign: 'center'
         }}>
           <h3>Your BMI is {bmiResult} kg/m²</h3>
           <p><strong>{category}</strong></p>
-          <button onClick={clearForm} style={{ 
-            marginTop: '10px', 
-            background: 'none', 
-            border: 'none', 
-            color: '#007bff', 
-            textDecoration: 'underline', 
-            cursor: 'pointer' 
+          <button onClick={clearForm} style={{
+            marginTop: '10px',
+            background: 'none',
+            border: 'none',
+            color: '#007bff',
+            textDecoration: 'underline',
+            cursor: 'pointer'
           }}>
             Reset
           </button>
@@ -129,4 +126,4 @@ export function BMICalculator() {
       </footer>
     </div>
   );
-};
+}
