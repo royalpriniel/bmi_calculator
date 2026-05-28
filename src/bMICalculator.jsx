@@ -18,17 +18,24 @@ export function BMICalculator() {
       setBmiResult(bmi);
 
       // Category Logic
-      if (bmi >= 19 && bmi <= 30) {
+      if (bmi >= 18.5 && bmi <= 24.99) {
         setCategory('You have a healthy weight.');
-      } else if (bmi < 19) {
+      } else if (bmi < 18.5) { 
         setCategory('You are underweight.');
-      } else {
+      } else if (bmi >= 25 && bmi <= 29.99){
         setCategory('You are overweight.');
       }
-    } else {
-      alert("Please enter valid positive numbers for weight and height.");
-    }
-  };
+      } else if(bmi >=30 && bmi <=34.99){
+        setCategory('You are moderately obese.')
+      } else if(bmi >=35 && bmi <=39.99){
+        setCategory('You are severely obese.')
+      } else if(bmi >=40){
+        setCategory('You are very severely obese.')
+      }
+      else {
+        alert("Please enter valid positive numbers for weight and height.");
+      }
+    };
 
   const clearForm = () => {
     setWeight('');
