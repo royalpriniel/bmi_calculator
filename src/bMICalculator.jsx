@@ -99,13 +99,7 @@ export function BMICalculator() {
       </form>
 
       {bmiResult && (
-        <div style={{
-          marginTop: '20px',
-          padding: '15px',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '5px',
-          textAlign: 'center'
-        }}>
+        <div className="result">
           <h3>Your BMI is {bmiResult} kg/m²</h3>
           <p><strong>{category}</strong></p>
           <button onClick={clearForm} style={{
